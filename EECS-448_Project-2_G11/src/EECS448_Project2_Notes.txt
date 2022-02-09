@@ -1,0 +1,8 @@
+Known bugs: 
+
+1) AI Place ship occassionally throws type reference error. (does not appear to adversely affect gameplay)
+
+FIXED bugs
+
+1) When picking the number of ships, clicking anything other than a ship number will make the buttons disappear
+2) Bridge Bug: to sink a ship, only the front, or "bridge" must be hit.

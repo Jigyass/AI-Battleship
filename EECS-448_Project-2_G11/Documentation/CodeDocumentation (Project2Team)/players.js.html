@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: players.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: players.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>class Player {
+    constructor(board, ID){
+        this.board = board;
+        this.player = ID;
+    }
+
+}
+/** 
+* @pre none
+* @param location of missile destination(where you want the missile to go)
+* @post updates the grid of the player who fired it depending on result, displays a blue or red box on the screen where they shot depending on result, alerts the play on the result of a shot
+*/
+function fire_missile(locations,player)
+{
+    if(player.board["grid"][locations[0]][locations[1]].filled == true)
+    {
+        player.board["grid"][locations[0]][locations[1]].hit = true
+        drawHitResult(locations[0], locations[1])
+
+	if(gameLogic.gameMode != 2){
+		console.log("HIT")
+		window.alert("HIT")
+	}
+	else{
+       		console.log("HIT on Player " + player.player + "'s fleet")		//distinguishing between players when mirror mode is turned on, since there will be two shots reported.	
+        	window.alert("HIT on Player " + player.player + "'s fleet")
+	}
+
+    }
+    else if(player.board["grid"][locations[0]][locations[1]].filled == false)
+    {
+        player.board["grid"][locations[0]][locations[1]].miss = true
+        drawMissResult(locations[0], locations[1])
+	if(gameLogic.gameMode != 2){
+		console.log("MISS")
+		window.alert("MISS")
+	}
+	else{
+       		console.log("MISS on Player " + player.player + "'s fleet") 	//distinguishing between players when mirror mode is turned on, since there will be two shots reported.	
+        	window.alert("MISS on Player " + player.player + "'s fleet")
+	}
+        
+    }
+}
+
+/** 
+* @pre none
+* @param none
+* @post outputs if a player has won the game
+*/
+function win_check()
+{
+    if(gameLogic.numShips == 1)
+    {
+        if(all_player1_ships[0].sunk == true &amp;&amp; all_player2_ships[0].sunk == true)  //check for draw corner case
+        {
+            alert("It's a draw, refresh screen to play again")
+        }
+        else if(all_player1_ships[0].sunk == true)
+        {
+            alert("Player 2 wins, refresh screen to play again")
+        }
+        
+        else if(all_player2_ships[0].sunk == true)
+        {
+            alert("Player 1 wins, refresh screen to play again")
+        }
+    }
+    else if (gameLogic.numShips == 2)
+    {
+        if((all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true) &amp;&amp; (all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true))  //check for draw corner case
+        {
+            alert("It's a draw, refresh screen to play again")
+    	}
+        else if(all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true)
+        {
+            alert("Player 2 wins, refresh screen to play again")
+        
+        }
+        
+        else if(all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true)
+        {
+            alert("Player 1 wins, refresh screen to play again")
+        }
+    }
+    else if (gameLogic.numShips == 3)
+    {
+        if((all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true) &amp;&amp; (all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true))  //check for draw corner case
+        {
+            alert("It's a draw, refresh screen to play again")
+    	}
+        else if(all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true)
+        {
+            alert("Player 2 wins, refersh screen to play again")
+        }
+        
+        else if(all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true)
+        {
+            alert("Player 1 wins, refresh screen to play again")
+        }
+    }
+    else if (gameLogic.numShips == 4)
+    {
+        if((all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true &amp;&amp; all_player1_ships[3].sunk == true) &amp;&amp; (all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true &amp;&amp; all_player2_ships[3].sunk == true))  //check for draw corner case
+        {
+            alert("It's a draw, refresh screen to play again")
+    	}
+        else if(all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true &amp;&amp; all_player1_ships[3].sunk == true)
+        {
+            alert("Player 2 wins, refersh screen to play again")
+        }
+        
+        else if(all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true &amp;&amp; all_player2_ships[3].sunk == true)
+        {
+            alert("Player 1 wins, refresh screen to play again")
+        }
+    }
+    else if (gameLogic.numShips == 5)
+    {   
+        if((all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true &amp;&amp; all_player1_ships[3].sunk == true&amp;&amp; all_player1_ships[4].sunk == true) &amp;&amp; (all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true &amp;&amp; all_player2_ships[3].sunk == true &amp;&amp; all_player2_ships[4].sunk == true))  //check for draw corner case
+        {
+            alert("It's a draw, refresh screen to play again")
+    	}
+        else if(all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true &amp;&amp; all_player1_ships[3].sunk == true &amp;&amp; all_player1_ships[4].sunk == true)
+        {
+            alert("Player 2 wins, refersh screen to play again")
+        }
+        
+        else if(all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true &amp;&amp; all_player2_ships[3].sunk == true &amp;&amp; all_player2_ships[4].sunk == true)
+        {
+            alert("Player 1 wins, refresh screen to play again")
+        }
+    }
+    else if (gameLogic.numShips == 6)
+    {
+        if((all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true &amp;&amp; all_player1_ships[3].sunk == true&amp;&amp; all_player1_ships[4].sunk == true &amp;&amp; all_player1_ships[5].sunk == true) &amp;&amp; (all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true &amp;&amp; all_player2_ships[3].sunk == true &amp;&amp; all_player2_ships[4].sunk == true &amp;&amp; all_player2_ships[5].sunk == true))  //check for draw corner case
+        {
+            alert("It's a draw, refresh screen to play again")
+    	}
+        else if(all_player1_ships[0].sunk == true &amp;&amp; all_player1_ships[1].sunk == true &amp;&amp; all_player1_ships[2].sunk == true &amp;&amp; all_player1_ships[3].sunk == true &amp;&amp; all_player1_ships[4].sunk == true &amp;&amp; all_player1_ships[5].sunk == true)
+        {
+            alert("Player 2 wins, refersh screen to play again")
+        }
+        
+        else if(all_player2_ships[0].sunk == true &amp;&amp; all_player2_ships[1].sunk == true &amp;&amp; all_player2_ships[2].sunk == true &amp;&amp; all_player2_ships[3].sunk == true &amp;&amp; all_player2_ships[4].sunk == true &amp;&amp; all_player2_ships[5].sunk == true)
+        {
+            alert("Player 1 wins, refresh screen to play again")
+        }
+    }    
+}
+
+let board1 = new GameState();
+let board2 = new GameState();
+let player1 = new Player(board1, 1);
+let player2 = new Player(board2, 2);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#drawAiSelection">drawAiSelection</a></li><li><a href="global.html#drawDoneTurnButton">drawDoneTurnButton</a></li><li><a href="global.html#drawFireText">drawFireText</a></li><li><a href="global.html#drawHitResult">drawHitResult</a></li><li><a href="global.html#drawHitsAndMissesDuringTurn">drawHitsAndMissesDuringTurn</a></li><li><a href="global.html#drawMissResult">drawMissResult</a></li><li><a href="global.html#drawModeSelection">drawModeSelection</a></li><li><a href="global.html#drawPlayersShipsDuringTurn">drawPlayersShipsDuringTurn</a></li><li><a href="global.html#drawShipConnections">drawShipConnections</a></li><li><a href="global.html#drawStartTurnButton">drawStartTurnButton</a></li><li><a href="global.html#drawStartUI">drawStartUI</a></li><li><a href="global.html#drawTemplate">drawTemplate</a></li><li><a href="global.html#easyShot">easyShot</a></li><li><a href="global.html#endTurngame">endTurngame</a></li><li><a href="global.html#endTurnshipplacing">endTurnshipplacing</a></li><li><a href="global.html#equals">equals</a></li><li><a href="global.html#fire_missile">fire_missile</a></li><li><a href="global.html#get_all_ship_cells">get_all_ship_cells</a></li><li><a href="global.html#get_hit_cells">get_hit_cells</a></li><li><a href="global.html#get_miss_cells">get_miss_cells</a></li><li><a href="global.html#get_ship_cells">get_ship_cells</a></li><li><a href="global.html#hardShot">hardShot</a></li><li><a href="global.html#mediumShot">mediumShot</a></li><li><a href="global.html#place_ship">place_ship</a></li><li><a href="global.html#roundMegreenhorz">roundMegreenhorz</a></li><li><a href="global.html#roundMegreenvert">roundMegreenvert</a></li><li><a href="global.html#roundMeredhorz">roundMeredhorz</a></li><li><a href="global.html#roundMeredvert">roundMeredvert</a></li><li><a href="global.html#ship_placement_interface">ship_placement_interface</a></li><li><a href="global.html#sink_ships">sink_ships</a></li><li><a href="global.html#transition">transition</a></li><li><a href="global.html#user_length_ship">user_length_ship</a></li><li><a href="global.html#verify_cordinates">verify_cordinates</a></li><li><a href="global.html#win_check">win_check</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Oct 10 2021 23:44:19 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+  </head>
+  
+  <body>
+    <h1>Board Methods</h1>
+    <p>
+/*
+* @pre none
+* @param none
+* @post draws the base template for the game
+*/
+function drawTemplate()
+   </p>
+  
+        <p>
+/*
+* @pre none
+* @param x coordinate and y coordinate of the cell selected to fire at
+* @post draws a red box at the coordinates
+*/
+function drawHitResult(x,y)
+   </p>
+    
+   <p>
+/*
+* @pre none
+* @param x coordinate and y coordinate of the cell selected to fire at
+* @post draws a blue box at the coordinates
+*/
+function drawMissResult(x,y)
+   </p>
+    
+   <p>
+/*
+* @pre none
+* @param none
+* @post draws the Start selection UI elements for the game
+*/
+function drawStartUI()
+   </p>    
+     
+   <p>
+/*
+* @pre none
+* @param none
+* @post draws the Start selection UI elements for the game
+*/
+function drawStartUI()
+   </p>      
+    
+   <p>
+/*
+* @pre none
+* @param none
+* @post draws the text that will display while the players are placing their ships
+*/
+function drawPlacingShipsText()
+   </p>      
+    
+    <p>
+/*
+* @pre none
+* @param none
+* @post draws the button that will indicate a given player is done with their turn
+*/
+function drawDoneTurnButton()
+   </p>  
+    
+    <p>
+/*
+* @pre none
+* @param none
+* @post draws the button that indicates a given player is about to start their turn
+*/
+function drawStartTurnButton()
+   </p>      
+    
+    <p>
+/*
+* @pre none
+* @param none
+* @post draws the ships of a given player when it is their turn
+*/
+function drawPlayersShipsDuringTurn()
+   </p>  
+    
+    <p>
+/*
+* @pre none
+* @param none
+* @post draws the hits and misses of a given player when it is their turn
+*/
+function drawHitsAndMissesDuringTurn()
+   </p>  
+      
+    <p>
+/*
+* @pre none
+* @param none
+* @post draws a line through the middle of a line of cells that make up a ship
+*/
+function drawShipConnections()
+   </p>     
+    
+    <p>
+/*
+* @pre none
+* @param Any given 2 arrays
+* @post Returns true if the arrays are equal
+*/
+function equals(array1, array2)
+   </p> 
+    
+<h2>Click Methods</h2>
+    
+    <p>
+/*/*
+* @pre 
+* @param x represents x coordinate passed in from coordinate pair
+* @post Converts x coordinate of screen to x value of cell on green board.
+*/
+function roundMegreenhorz(x){ return Math.floor(((x-85)/55))}
+   </p> 
+    
+    <p>
+/*
+* @pre 
+* @param y represents y coordinate passed in from coordinate pair
+* @post Converts y coordinate of screen to y value of cell on green board.
+*/
+function roundMegreenvert(y){return Math.floor(((y-85)/61.1))}
+   </p> 
+    
+    <p>
+/*
+* @pre 
+* @param x represents x coordinate passed in from coordinate pair
+* @post Converts x coordinate of screen to x value of cell on red board.
+*/
+function roundMeredhorz(x){ return Math.floor(((x-885)/55))}
+   </p> 
+    
+        <p>
+/*
+* @pre User clicks coordiantes for start point and end point for ship
+* @param [x,y] representing the first coord and [m,n] representing the second coordiante, distance is set to the appropiate distance corresponding to the ship length.
+* @post Returns true if endpoints match distance of ship false if otherwise
+*/
+
+function user_length_ship([x,y],[m,n],distance)
+   </p> 
+    
+        <p>
+/*
+* @pre User clicks screen to indicate wher ship should be placed
+* @param n which represents the length of the ship being placed, shipplaced which describes if the ship placement was successful
+* @post Alerts user to place certain ship and passes control to click event to verify if ship placement was successful.
+*/
+function ship_placement_interface(n,shipplaced)
+   </p> 
+    
+        <p>
+/*
+* @pre User clicks on screen
+* @param e represents x,y coordiante pair for where user clicked on screen.
+* @post Performs variety of tasks depending on where user clicked 
+*/
+
+
+document.addEventListener("click", e => {
+   </p> 
+    
+    <h3>Game Methods</h3>
+    
+            <p>
+  /*
+* @pre User starts placing ships
+* @param x,y represent click event coordinates for where user clicked
+* @post Changes turns before player 1 and player 2 for placing ships.
+*/
+
+function endTurnshipplacing(x,y)
+   </p> 
+      
+            <p>
+ /*
+* @pre User finishes placing ships 
+* @param x,y represent click event coordinates for where user clicked
+* @post Changes state of program from ship placing to firing and missing
+*/
+
+function transition(x,y)
+   </p>     
+    
+            <p>
+ /*
+* @pre User starts firing and missing 
+* @param x,y represent click event coordinates for where user clicked
+* @post Changes turns before player 1 and player 2 for firing and missing
+*/
+
+
+function endTurngame(x,y, temp_player)
+   </p>   
+    
+    <h4>Player Methods</h4>
+    
+            <p>
+/*
+* @pre none
+* @param location of missile destination(where you want the missile to go)
+* @post updates the grid of the player who fired it depending on result, displays a blue or red box on the screen where they shot depending on result, alerts the play on the result of a shot
+*/
+function fire_missile(locations,player)
+   </p>  
+    
+            <p>
+/*
+* @pre none
+* @param none
+* @post outputs if a player has won the game
+*/
+function win_check()
+   </p>     
+    
+    <h5>Ship Methods</h5>
+    
+            <p>
+/*
+* @pre none
+* @param current player
+* @post will set a ships value in the all player ships array to sunk
+*/
+function sink_ships(player)
+   </p> 
+    
+            <p>
+/*
+* @pre none
+* @param current player
+* @post iterates through a players grid and finds what cells of a players grid are filled, retruns an array of all the filled values
+*/
+function get_ship_cells(player)
+   </p> 
+    
+            <p>
+/*
+* @pre none
+* @param current player
+* @post iterates through a players grid and finds what cells of a players grid are hit, retruns an array of all the hit values
+*/
+function get_hit_cells(player)
+   </p> 
+    
+            <p>
+/*
+* @pre none
+* @param current player
+* @post iterates through a players grid and finds what cells of a players grid are missed, retruns an array of all the missed values
+*/
+function get_miss_cells(player)
+   </p> 
+    
+            <p>
+/*
+* @pre none
+* @param front coordinate of ship, last coordinate of ship
+* @post constructs a new ship, updates the players grid to fill the cells the ship will take up
+* 
+*/
+function place_ship(cord1, cord2, player)
+   </p>
+    
+            <p>
+/*
+* @pre none
+* @param size of a potential ship, coordinate1/ front of ship, coordinite2 / tail of ship, and current player
+* @post verifies is a ships potential coorinites will work. (determines if a ship can be placed in cells). If problem is triggered, it throws errors
+*/
+function verify_cordinates(ship_size, cord1, cord2, player)
+   </p>
+   
+  </body>
+</html>
